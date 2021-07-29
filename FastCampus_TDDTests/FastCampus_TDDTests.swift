@@ -27,6 +27,32 @@ class GeneratorStub: PositiveIntegerGenerator {
     }
 }
 
+class ProductDataSourceStub: ProductDataSource {
+    private let products: [Product]
+    init(products: [Product]) {
+        self.products = products
+    }
+    func fetchProductSource() -> [Product] {
+        products
+    }
+}
+
+class ProductInventorySpy: ProductInventory {
+    private var log: [Product]
+    
+    init() {
+        log = []
+    }
+    
+    func upsertProduct(_ product: Product) {
+        log.append(product)
+    }
+    
+    func getLog() -> [Product] {
+        log
+    }
+}
+
 class FastCampus_TDDTests: XCTestCase {
 
     func test_IsCompleted_when_initialized() {
@@ -205,5 +231,61 @@ class FastCampus_TDDTests: XCTestCase {
         appModel.setInput(.guess(10))
         
         XCTAssertTrue(appModel.flushOutput().contains("Enter " + players[0] + "'s guess: "))
+    }
+    
+    // Stub!
+    func test_projects_all_products() {
+        let source = [Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000), Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000)]
+        let stub = ProductDataSourceStub(products: source)
+        let sut = ProductImporter(dataSource: stub)
+        let actual = sut.fetchProductSource()
+        
+        XCTAssertTrue(actual.count == source.count)
+    }
+    
+    func test_collectly_sets_supplier_name() {
+        let source = [Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000), Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000)]
+        let stub = ProductDataSourceStub(products: source)
+        let sut = ProductImporter(dataSource: stub)
+        let actual = sut.fetchProductSource()
+        
+        actual.forEach { XCTAssertTrue($0.getSupplierName() == "WAYNE") }
+    }
+    
+    func test_collectly_projects_source_properties() {
+        let source = Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000)
+        let stub = ProductDataSourceStub(products: [source])
+        let sut = ProductImporter(dataSource: stub)
+        let actual = sut.fetchProductSource()[0]
+        
+        XCTAssertTrue(actual.getSupplierName() == source.supplierName)
+        XCTAssertTrue(actual.getProductCode() == source.productCode)
+        XCTAssertTrue(actual.getProductName() == source.productName)
+        XCTAssertTrue(actual.getPrice() == source.price)
+    }
+    
+    // Spy
+    func test_correctly_saves_products() {
+        let source = [Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000), Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000)]
+        let stub = ProductDataSourceStub(products: source)
+        let importer = ProductImporter(dataSource: stub)
+        let spy = ProductInventorySpy()
+        let sut = ProductSynchronizer(importer: importer, validator: ProductValidator(), inventory: spy)
+        
+        sut.run()
+        
+        XCTAssertEqual(spy.getLog(), importer.fetchProductSource())
+    }
+    
+    func test_does_not_save_invalid_product() {
+        let source = [Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000), Product(supplierName: "WAYNE", productCode: "WAYNE", productName: "WAYNE", price: 10000)]
+        let stub = ProductDataSourceStub(products: source)
+        let importer = ProductImporter(dataSource: stub)
+        let spy = ProductInventorySpy()
+        let sut = ProductSynchronizer(importer: importer, validator: ProductValidator(lowerBound: 1000000), inventory: spy)
+        
+        sut.run()
+        
+        XCTAssertTrue(spy.getLog().isEmpty)
     }
 }
