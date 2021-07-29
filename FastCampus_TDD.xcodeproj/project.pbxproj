@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		783B3AC526B16D8C00709570 /* ProductSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B3AC426B16D8C00709570 /* ProductSource.swift */; };
+		783B3AC726B16DB400709570 /* MyProductDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B3AC626B16DB400709570 /* MyProductDataSource.swift */; };
+		783B3AC926B16DD300709570 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B3AC826B16DD300709570 /* Product.swift */; };
+		783B3ACB26B16ED800709570 /* ProductImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B3ACA26B16ED800709570 /* ProductImporter.swift */; };
+		783B3ACD26B175B000709570 /* ProductSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B3ACC26B175B000709570 /* ProductSynchronizer.swift */; };
 		AA3D486126953A5C00402857 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D486026953A5C00402857 /* AppDelegate.swift */; };
 		AA3D486326953A5C00402857 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D486226953A5C00402857 /* SceneDelegate.swift */; };
 		AA3D486526953A5C00402857 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D486426953A5C00402857 /* ViewController.swift */; };
@@ -38,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		783B3AC426B16D8C00709570 /* ProductSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSource.swift; sourceTree = "<group>"; };
+		783B3AC626B16DB400709570 /* MyProductDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductDataSource.swift; sourceTree = "<group>"; };
+		783B3AC826B16DD300709570 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		783B3ACA26B16ED800709570 /* ProductImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImporter.swift; sourceTree = "<group>"; };
+		783B3ACC26B175B000709570 /* ProductSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSynchronizer.swift; sourceTree = "<group>"; };
 		AA3D485D26953A5C00402857 /* FastCampus_TDD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastCampus_TDD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA3D486026953A5C00402857 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA3D486226953A5C00402857 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +92,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		783B3AC326B16D6D00709570 /* ProductSource */ = {
+			isa = PBXGroup;
+			children = (
+				783B3AC426B16D8C00709570 /* ProductSource.swift */,
+				783B3AC626B16DB400709570 /* MyProductDataSource.swift */,
+				783B3AC826B16DD300709570 /* Product.swift */,
+				783B3ACA26B16ED800709570 /* ProductImporter.swift */,
+				783B3ACC26B175B000709570 /* ProductSynchronizer.swift */,
+			);
+			path = ProductSource;
+			sourceTree = "<group>";
+		};
 		AA3D485426953A5C00402857 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +127,7 @@
 		AA3D485F26953A5C00402857 /* FastCampus_TDD */ = {
 			isa = PBXGroup;
 			children = (
+				783B3AC326B16D6D00709570 /* ProductSource */,
 				AA3D48A12695436000402857 /* App */,
 				AA3D489826953FB200402857 /* NumberGenerator */,
 				AA3D486026953A5C00402857 /* AppDelegate.swift */,
@@ -283,11 +306,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				783B3ACD26B175B000709570 /* ProductSynchronizer.swift in Sources */,
+				783B3AC526B16D8C00709570 /* ProductSource.swift in Sources */,
 				AA3D486526953A5C00402857 /* ViewController.swift in Sources */,
+				783B3AC926B16DD300709570 /* Product.swift in Sources */,
 				AA3D48A32695436600402857 /* AppModel.swift in Sources */,
 				AA3D489426953F6E00402857 /* PositiveIntegerGenerator.swift in Sources */,
 				AA3D489A26953FD300402857 /* RandomGenerator.swift in Sources */,
 				AA3D486126953A5C00402857 /* AppDelegate.swift in Sources */,
+				783B3ACB26B16ED800709570 /* ProductImporter.swift in Sources */,
+				783B3AC726B16DB400709570 /* MyProductDataSource.swift in Sources */,
 				AA3D486326953A5C00402857 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
